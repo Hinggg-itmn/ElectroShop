@@ -1,0 +1,137 @@
+@model ShopViewModel
+@{
+    ViewData["Title"] = "Shop";
+}
+
+<!-- Page Header -->
+<div class="container-fluid page-header py-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Shop</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-white">Home</a></li>
+                <li class="breadcrumb-item text-primary active" aria-current="page">Shop</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row g-4">
+
+            <!-- ── Sidebar ──────────────────────────────────────────────── -->
+            <div class="col-lg-3 col-xl-3">
+                <div class="card border-0 shadow-sm rounded mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4 text-primary">
+                            <i class="fas fa-filter me-2"></i>Filter Products
+                        </h5>
+
+                        <form asp-controller="Shop" asp-action="Index" method="get" id="filterForm">
+                            <!-- Search -->
+                            <div class="mb-4">
+                                <label class="fw-semibold mb-2 d-block">Search</label>
+                                <input type="text" name="query" class="form-control rounded-pill"
+                                       placeholder="Product name..." value="@Model.Query" />
+                            </div>
+
+                            <!-- Category -->
+                            <div class="mb-4">
+                                <label class="fw-semibold mb-2 d-block">Category</label>
+                                @foreach (var cat in Model.Categories)
+                                {
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="category"
+                                               id="cat-@cat" value="@cat"
+                                               @(Model.SelectedCategory == cat ? "checked" : "") />
+                                        <label class="form-check-label" for="cat-@cat">@cat</label>
+                                    </div>
+                                }
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="category"
+                                           id="cat-all" value=""
+                                           @(string.IsNullOrEmpty(Model.SelectedCategory) ? "checked" : "") />
+                                    <label class="form-check-label" for="cat-all"><em>All Categories</em></label>
+                                </div>
+                            </div>
+
+                            <!-- Price Range -->
+                            <div class="mb-4">
+                                <label class="fw-semibold mb-2 d-block">Price Range</label>
+                                <div class="d-flex gap-2">
+                                    <input type="number" name="minPrice" class="form-control form-control-sm"
+                                           placeholder="Min $" value="@Model.MinPrice" min="0" />
+                                    <input type="number" name="maxPrice" class="form-control form-control-sm"
+                                           placeholder="Max $" value="@Model.MaxPrice" min="0" />
+                                </div>
+                            </div>
+
+                            <!-- Sort -->
+                            <div class="mb-4">
+                                <label class="fw-semibold mb-2 d-block">Sort By</label>
+                                <select name="sortBy" class="form-select">
+                                    <option value="" selected="@(Model.SortBy == null)">Default</option>
+                                    <option value="price_asc" selected="@(Model.SortBy == "price_asc")">Price: Low → High</option>
+                                    <option value="price_desc" selected="@(Model.SortBy == "price_desc")">Price: High → Low</option>
+                                    <option value="rating" selected="@(Model.SortBy == "rating")">Top Rated</option>
+                                    <option value="newest" selected="@(Model.SortBy == "newest")">Newest</option>
+                                    <option value="bestseller" selected="@(Model.SortBy == "bestseller")">Best Sellers</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 rounded-pill">
+                                <i class="fas fa-search me-2"></i>Apply Filter
+                            </button>
+                            <a asp-controller="Shop" asp-action="Index"
+                               class="btn btn-outline-secondary w-100 rounded-pill mt-2">
+                                <i class="fas fa-times me-2"></i>Clear All
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Product Grid ────────────────────────────────────────── -->
+            <div class="col-lg-9 col-xl-9">
+                <!-- Results bar -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <p class="mb-0 text-muted">
+                        Showing <strong>@Model.TotalResults</strong> product@(Model.TotalResults != 1 ? "s" : "")
+                        @if (!string.IsNullOrEmpty(Model.Query))
+                        {
+                            <span> for "<strong>@Model.Query</strong>"</span>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.SelectedCategory))
+                        {
+                            <span> in <strong>@Model.SelectedCategory</strong></span>
+                        }
+                    </p>
+                </div>
+
+                @if (!Model.Products.Any())
+                {
+                    <div class="text-center py-5">
+                        <i class="fas fa-search fa-4x text-muted mb-4"></i>
+                        <h4 class="text-muted">No products found</h4>
+                        <p class="text-muted">Try adjusting your search or filter criteria.</p>
+                        <a asp-controller="Shop" asp-action="Index" class="btn btn-primary rounded-pill">
+                            View All Products
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="row g-4">
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-md-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
+                                @await Html.PartialAsync("_ProductCard", product)
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

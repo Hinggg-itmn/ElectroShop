@@ -1,0 +1,135 @@
+@model CartViewModel
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<!-- Page Header -->
+<div class="container-fluid page-header py-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Shopping Cart</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb animated slideInDown">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-white">Home</a></li>
+                <li class="breadcrumb-item text-primary active">Cart</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        @if (!Model.Items.Any())
+        {
+            <div class="text-center py-5 wow fadeInUp" data-wow-delay="0.1s">
+                <i class="fas fa-shopping-cart fa-5x text-muted mb-4"></i>
+                <h3 class="text-muted mb-4">Giỏ hàng của bạn đang trống</h3>
+                <a asp-controller="Shop" asp-action="Index" class="btn btn-primary rounded-pill py-3 px-5">
+                    <i class="fas fa-store me-2"></i>Tiếp tục mua sắm
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="row g-5">
+                <!-- Cart Table -->
+                <div class="col-lg-8 wow fadeInLeft" data-wow-delay="0.1s">
+                    <div class="table-responsive">
+                        <table class="table table-borderless align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th colspan="2">Product</th>
+                                    <th class="text-center">Unit Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr class="border-bottom">
+                                        <td style="width:80px;">
+                                            <img src="@item.ImageUrl" class="img-fluid rounded"
+                                                 style="width:70px;height:70px;object-fit:contain;" alt="@item.Name" />
+                                        </td>
+                                        <td>
+                                            <h6 class="mb-0">@item.Name</h6>
+                                        </td>
+                                        <td class="text-center">$@item.UnitPrice.ToString("N2")</td>
+                                        <td class="text-center" style="width:160px;">
+                                            <form asp-controller="Cart" asp-action="Update" method="post"
+                                                  class="d-flex align-items-center justify-content-center">
+                                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                                <div class="input-group" style="width:130px;">
+                                                    <button type="submit" name="quantity" value="@(item.Quantity - 1)"
+                                                            class="btn btn-sm btn-outline-secondary">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                    <span class="form-control text-center border-0 fw-bold">@item.Quantity</span>
+                                                    <button type="submit" name="quantity" value="@(item.Quantity + 1)"
+                                                            class="btn btn-sm btn-outline-secondary">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td class="text-center fw-bold text-primary">$@item.SubTotal.ToString("N2")</td>
+                                        <td class="text-center">
+                                            <form asp-controller="Cart" asp-action="Remove" method="post">
+                                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                                <button type="submit" class="btn btn-sm text-danger border-0"
+                                                        title="Remove">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-controller="Shop" asp-action="Index" class="btn btn-outline-primary rounded-pill py-2 px-4">
+                            <i class="fas fa-arrow-left me-2"></i>Continue Shopping
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="col-lg-4 wow fadeInRight" data-wow-delay="0.1s">
+                    <div class="card border-0 shadow-sm rounded">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-4 text-primary">
+                                <i class="fas fa-receipt me-2"></i>Order Summary
+                            </h5>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="text-muted">Subtotal (@Model.ItemCount items)</span>
+                                <span class="fw-semibold">$@Model.SubTotal.ToString("N2")</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="text-muted">Shipping</span>
+                                @if (Model.ShippingFee == 0)
+                                {
+                                    <span class="text-success fw-semibold">Free</span>
+                                }
+                                else
+                                {
+                                    <span class="fw-semibold">$@Model.ShippingFee.ToString("N2")</span>
+                                }
+                            </div>
+                            <hr />
+                            <div class="d-flex justify-content-between mb-4">
+                                <span class="fw-bold fs-5">Total</span>
+                                <span class="fw-bold fs-5 text-primary">$@Model.Total.ToString("N2")</span>
+                            </div>
+                            <a asp-controller="Checkout" asp-action="Index"
+                               class="btn btn-primary w-100 rounded-pill py-3">
+                                <i class="fas fa-credit-card me-2"></i>Proceed to Checkout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

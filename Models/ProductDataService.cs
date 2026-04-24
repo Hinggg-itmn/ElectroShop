@@ -1,0 +1,122 @@
+namespace ElectroShop.Models;
+
+/// <summary>
+/// Mock data service — thay bằng DbContext + EF Core khi kết nối database thật.
+/// </summary>
+public class ProductDataService
+{
+    private readonly List<Product> _products = new()
+    {
+        new Product { Id = 1, Name = "Apple iPad Mini G2356", Category = "Tablets",
+            Brand = "Apple", Price = 1099.00m, OldPrice = 1299.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=iPad+Mini",
+            Rating = 4.5, ReviewCount = 128, IsNew = true, IsBestSeller = true,
+            Stock = 15, Description = "iPad Mini thế hệ mới với chip M2, màn hình Liquid Retina 8.3 inch." },
+
+        new Product { Id = 2, Name = "Samsung Galaxy S23 Ultra", Category = "Smartphones",
+            Brand = "Samsung", Price = 1199.00m, OldPrice = 1399.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=Galaxy+S23",
+            Rating = 4.8, ReviewCount = 342, IsBestSeller = true, IsFeatured = true,
+            Stock = 8, Description = "Flagship cao cấp nhất của Samsung với camera 200MP." },
+
+        new Product { Id = 3, Name = "Sony Alpha A7 IV", Category = "Cameras",
+            Brand = "Sony", Price = 2499.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=Sony+A7",
+            Rating = 4.9, ReviewCount = 89, IsFeatured = true,
+            Stock = 5, Description = "Máy ảnh mirrorless full-frame 33MP chuyên nghiệp." },
+
+        new Product { Id = 4, Name = "Apple Watch Series 9", Category = "Wearables",
+            Brand = "Apple", Price = 399.00m, OldPrice = 499.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=Apple+Watch",
+            Rating = 4.7, ReviewCount = 215, IsNew = true, IsBestSeller = true,
+            Stock = 20, Description = "Smartwatch mạnh mẽ nhất của Apple với chip S9." },
+
+        new Product { Id = 5, Name = "MacBook Pro 14\" M3", Category = "Laptops",
+            Brand = "Apple", Price = 1999.00m, OldPrice = 2199.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=MacBook+Pro",
+            Rating = 4.9, ReviewCount = 456, IsFeatured = true,
+            Stock = 12, Description = "Laptop chuyên nghiệp với chip M3 Pro siêu mạnh." },
+
+        new Product { Id = 6, Name = "Sony WH-1000XM5", Category = "Audio",
+            Brand = "Sony", Price = 349.00m, OldPrice = 399.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=Sony+WH5",
+            Rating = 4.6, ReviewCount = 678, IsBestSeller = true,
+            Stock = 30, Description = "Tai nghe chống ồn hàng đầu thế giới." },
+
+        new Product { Id = 7, Name = "Canon EOS R17i Kit", Category = "Cameras",
+            Brand = "Canon", Price = 879.00m, OldPrice = 999.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=Canon+EOS",
+            Rating = 4.4, ReviewCount = 143, IsNew = true,
+            Stock = 7, Description = "Máy ảnh DSLR dành cho người mới bắt đầu." },
+
+        new Product { Id = 8, Name = "Dell XPS 15 OLED", Category = "Laptops",
+            Brand = "Dell", Price = 1799.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=Dell+XPS",
+            Rating = 4.5, ReviewCount = 201, IsFeatured = true,
+            Stock = 9, Description = "Laptop cao cấp màn hình OLED 15.6 inch 4K." },
+
+        new Product { Id = 9, Name = "Bose QuietComfort 45", Category = "Audio",
+            Brand = "Bose", Price = 279.00m, OldPrice = 329.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=Bose+QC45",
+            Rating = 4.5, ReviewCount = 389, IsBestSeller = true,
+            Stock = 25, Description = "Tai nghe over-ear chống ồn cực kỳ thoải mái." },
+
+        new Product { Id = 10, Name = "iPad Pro 12.9\" M2", Category = "Tablets",
+            Brand = "Apple", Price = 1299.00m, OldPrice = 1499.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=iPad+Pro",
+            Rating = 4.8, ReviewCount = 312, IsBestSeller = true, IsFeatured = true,
+            Stock = 11, Description = "iPad Pro mạnh nhất với màn hình Liquid Retina XDR." },
+
+        new Product { Id = 11, Name = "Samsung 4K QLED TV 55\"", Category = "TVs",
+            Brand = "Samsung", Price = 899.00m, OldPrice = 1099.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=Samsung+TV",
+            Rating = 4.6, ReviewCount = 156, IsFeatured = true,
+            Stock = 6, Description = "TV 4K QLED 55 inch với công nghệ Quantum Dot." },
+
+        new Product { Id = 12, Name = "DJI Mini 4 Pro", Category = "Drones",
+            Brand = "DJI", Price = 759.00m,
+            ImageUrl = "https://via.placeholder.com/300x300?text=DJI+Mini4",
+            Rating = 4.7, ReviewCount = 98, IsNew = true,
+            Stock = 14, Description = "Drone nhỏ gọn quay 4K/60fps chuyên nghiệp." },
+    };
+
+    public List<Product> GetAll() => _products;
+
+    public Product? GetById(int id) => _products.FirstOrDefault(p => p.Id == id);
+
+    public List<Product> GetFeatured() => _products.Where(p => p.IsFeatured).Take(8).ToList();
+
+    public List<Product> GetBestSellers() => _products.Where(p => p.IsBestSeller).Take(8).ToList();
+
+    public List<Product> GetNewArrivals() => _products.Where(p => p.IsNew).Take(8).ToList();
+
+    public List<string> GetCategories() =>
+        _products.Select(p => p.Category).Distinct().OrderBy(c => c).ToList();
+
+    public List<Product> Search(string? query, string? category, string? sortBy, decimal? minPrice, decimal? maxPrice)
+    {
+        var result = _products.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(query))
+            result = result.Where(p =>
+                p.Name.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                p.Brand.Contains(query, StringComparison.OrdinalIgnoreCase));
+
+        if (!string.IsNullOrWhiteSpace(category))
+            result = result.Where(p => p.Category == category);
+
+        if (minPrice.HasValue) result = result.Where(p => p.Price >= minPrice);
+        if (maxPrice.HasValue) result = result.Where(p => p.Price <= maxPrice);
+
+        result = sortBy switch
+        {
+            "price_asc"  => result.OrderBy(p => p.Price),
+            "price_desc" => result.OrderByDescending(p => p.Price),
+            "rating"     => result.OrderByDescending(p => p.Rating),
+            "newest"     => result.Where(p => p.IsNew).Concat(result.Where(p => !p.IsNew)),
+            _            => result.OrderByDescending(p => p.IsBestSeller)
+        };
+
+        return result.ToList();
+    }
+}
