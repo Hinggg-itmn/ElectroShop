@@ -1,0 +1,16 @@
+.env
+.vscode
+*.config
+*.secrets
+#Thư mục chứa file thực thi sau khi build
+[Bb]in/
+[Oo]bj/
+
+# Các file rác phát sinh trong quá trình build
+bin/
+obj/
+
+ElectroShop.sln
+ElectroShop.csproj
+appsettings.json
+appsettings.Development.json
