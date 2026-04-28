@@ -1,16 +1,15 @@
+# Tệp bí mật
 .env
-.vscode
-*.config
 *.secrets
-#Thư mục chứa file thực thi sau khi build
+
+# Thư mục IDE
+.vscode/
+.idea/
+
+# File build của .NET (Bắt buộc giấu)
 [Bb]in/
 [Oo]bj/
 
-# Các file rác phát sinh trong quá trình build
-bin/
-obj/
-
-ElectroShop.sln
-ElectroShop.csproj
-appsettings.json
+# Các file cấu hình cá nhân (nếu có)
 appsettings.Development.json
+

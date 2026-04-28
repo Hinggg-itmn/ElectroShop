@@ -6,12 +6,12 @@
 <!-- Page Header -->
 <div class="container-fluid page-header py-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
-        <h1 class="display-3 text-white mb-3 animated slideInDown">Checkout</h1>
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Thanh Toán</h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb animated slideInDown">
-                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-white">Home</a></li>
-                <li class="breadcrumb-item"><a asp-controller="Cart" asp-action="Index" class="text-white">Cart</a></li>
-                <li class="breadcrumb-item text-primary active">Checkout</li>
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-white">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Cart" asp-action="Index" class="text-white">Giỏ hàng</a></li>
+                <li class="breadcrumb-item text-primary active">Thanh ToáN</li>
             </ol>
         </nav>
     </div>
@@ -28,17 +28,17 @@
                     <div class="card border-0 shadow-sm rounded">
                         <div class="card-body p-4 p-md-5">
                             <h4 class="fw-bold mb-4 text-primary">
-                                <i class="fas fa-user me-2"></i>Billing Information
+                                <i class="fas fa-user me-2"></i>Thông tin thanh toán
                             </h4>
 
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label class="form-label fw-semibold">First Name <span class="text-danger">*</span></label>
+                                    <label class="form-label fw-semibold">Họ và tên đệm <span class="text-danger">*</span></label>
                                     <input asp-for="FirstName" class="form-control rounded-pill" placeholder="Nguyễn" required />
                                     <span asp-validation-for="FirstName" class="text-danger small"></span>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Last Name <span class="text-danger">*</span></label>
+                                    <label class="form-label fw-semibold">Tên <span class="text-danger">*</span></label>
                                     <input asp-for="LastName" class="form-control rounded-pill" placeholder="Văn A" required />
                                     <span asp-validation-for="LastName" class="text-danger small"></span>
                                 </div>
@@ -49,22 +49,22 @@
                                     <span asp-validation-for="Email" class="text-danger small"></span>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Phone Number</label>
+                                    <label class="form-label fw-semibold">Số điện thoại</label>
                                     <input asp-for="Phone" type="tel" class="form-control rounded-pill"
                                            placeholder="+84 xxx xxx xxx" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Address <span class="text-danger">*</span></label>
+                                    <label class="form-label fw-semibold">Địa chỉ <span class="text-danger">*</span></label>
                                     <input asp-for="Address" class="form-control rounded-pill"
                                            placeholder="123 Đường ABC" required />
                                     <span asp-validation-for="Address" class="text-danger small"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label fw-semibold">City</label>
+                                    <label class="form-label fw-semibold">Thành phố</label>
                                     <input asp-for="City" class="form-control rounded-pill" placeholder="Hà Nội" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label fw-semibold">Country</label>
+                                    <label class="form-label fw-semibold">Nước</label>
                                     <select asp-for="Country" class="form-select rounded-pill">
                                         <option value="Vietnam">Vietnam</option>
                                         <option value="USA">USA</option>
@@ -72,14 +72,14 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label fw-semibold">Postal Code</label>
+                                    <label class="form-label fw-semibold">Mã bưu chính</label>
                                     <input asp-for="PostalCode" class="form-control rounded-pill" placeholder="700000" />
                                 </div>
                             </div>
 
                             <!-- Payment -->
                             <h4 class="fw-bold mt-5 mb-4 text-primary">
-                                <i class="fas fa-credit-card me-2"></i>Payment Method
+                                <i class="fas fa-credit-card me-2"></i>Phuơng thức thanh toán
                             </h4>
                             <div class="row g-3">
                                 <div class="col-md-4">
@@ -87,7 +87,7 @@
                                         <input class="d-none" type="radio" asp-for="PaymentMethod"
                                                id="pay-cod" value="cod" checked />
                                         <label class="btn btn-outline-primary w-100 rounded-pill py-3" for="pay-cod">
-                                            <i class="fas fa-money-bill me-2"></i>Cash on Delivery
+                                            <i class="fas fa-money-bill me-2"></i>Thanh toán khi nhận hàng
                                         </label>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                         <input class="d-none" type="radio" asp-for="PaymentMethod"
                                                id="pay-card" value="card" />
                                         <label class="btn btn-outline-primary w-100 rounded-pill py-3" for="pay-card">
-                                            <i class="fas fa-credit-card me-2"></i>Credit Card
+                                            <i class="fas fa-credit-card me-2"></i>Thẻ tín dụng
                                         </label>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                     <div class="card border-0 shadow-sm rounded sticky-top" style="top:20px;">
                         <div class="card-body p-4">
                             <h5 class="fw-bold mb-4 text-primary">
-                                <i class="fas fa-receipt me-2"></i>Your Order
+                                <i class="fas fa-receipt me-2"></i>Giỏ hàng
                             </h5>
 
                             @foreach (var item in Model.Cart.Items)
@@ -137,21 +137,21 @@
                             }
 
                             <div class="d-flex justify-content-between mb-2">
-                                <span class="text-muted">Subtotal</span>
+                                <span class="text-muted">Tổng phụ</span>
                                 <span>$@Model.Cart.SubTotal.ToString("N2")</span>
                             </div>
                             <div class="d-flex justify-content-between mb-3">
-                                <span class="text-muted">Shipping</span>
-                                <span class="text-success">Free</span>
+                                <span class="text-muted">Giao hàng</span>
+                                <span class="text-success">Miễn phí</span>
                             </div>
                             <hr />
                             <div class="d-flex justify-content-between mb-4">
-                                <span class="fw-bold fs-5">Total</span>
+                                <span class="fw-bold fs-5">Tổng chi</span>
                                 <span class="fw-bold fs-5 text-primary">$@Model.Cart.Total.ToString("N2")</span>
                             </div>
 
                             <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold">
-                                <i class="fas fa-check-circle me-2"></i>Place Order
+                                <i class="fas fa-check-circle me-2"></i>Đặt hàng
                             </button>
                         </div>
                     </div>
