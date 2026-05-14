@@ -223,6 +223,10 @@
 /*** Navbar End ***/
 
 /*** Carousel Header Start ***/
+.carousel {
+    margin-bottom: 50px;
+}
+
 .header-carousel.owl-carousel .owl-nav .owl-prev,
 .header-carousel.owl-carousel .owl-nav .owl-next {
     position: absolute;
@@ -413,8 +417,14 @@
 
 
 /*** ProductList Categories Start ***/
+.productList {
+    margin-bottom: 200px;
+    padding-bottom: 100px;
+}
+
 .productList .productList-carousel {
     height: 215px !important;
+    margin-bottom: 100px;
 }
 
 .productList .productList-carousel .productImg-carousel.productList-item .productImg-item {
@@ -842,6 +852,7 @@
 /*** Footer Start ***/
 .footer {
     background: var(--bs-dark);
+    margin-top: 50px;
 }
 .footer .footer-item a {
     line-height: 30px;

@@ -169,12 +169,24 @@
                                     <a asp-controller="Error" asp-action="Index" asp-route-statusCode="404" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
+                            <div class="nav-item dropdown">
+                                    <a asp-controller="About"   asp-action="Index"    class="dropdown-item">Giới thiệu</a>
+                                    <a asp-controller="Shop"    asp-action="Bestseller" class="dropdown-item">Bestseller</a>
+                                    <a asp-controller="Cart"    asp-action="Index"    class="dropdown-item">Giỏ hàng</a>
+                                    <a asp-controller="Checkout" asp-action="Index"   class="dropdown-item">Checkout</a>
+                                    <a asp-controller="Account" asp-action="Login"    class="dropdown-item">Đăng nhập</a>
+                                    <a asp-controller="Account" asp-action="Register" class="dropdown-item">Đăng ký</a>
+                            </div>
 
                             <a asp-controller="Contact" asp-action="Index"
                                class="nav-item nav-link me-2 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Contact" ? "active" : "")">Contact</a>
                         </div>
                         <a href="tel:+0123456789" class="btn btn-secondary rounded-pill py-2 px-4 mb-3 mb-lg-0">
                             <i class="fa fa-mobile-alt me-2"></i>+0123 456 7890
+                        </a>
+                        <a asp-controller="About" asp-action="Index"
+                        class="nav-item nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "About" ? "active" : "")">
+                        Giới thiệu
                         </a>
                     </div>
                 </nav>

@@ -49,3 +49,14 @@ public class ShopController : Controller
         return View(vm);
     }
 }
+// GET: /shop/bestseller
+public IActionResult Bestseller()
+{
+    var vm = new ShopViewModel
+    {
+        Products   = _dataService.GetBestSellers(),
+        Categories = _dataService.GetCategories(),
+    };
+    ViewData["Title"] = "Best Sellers";
+    return View("Index", vm); // dùng lại View Index của Shop
+}
