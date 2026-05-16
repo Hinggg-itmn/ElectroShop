@@ -1,0 +1,164 @@
+@{
+    ViewData["Title"] = "Giới thiệu";
+}
+
+@await Html.PartialAsync("_PageHeader", new ViewDataDictionary(ViewData)
+{
+    { "PageTitle", "Giới thiệu" },
+    { "ParentName", "Trang chủ" },
+    { "ParentUrl",  "/" }
+})
+
+<!-- Giới thiệu chính -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <h6 class="text-primary text-uppercase mb-3" style="letter-spacing:3px;">Về Chúng Tôi</h6>
+                <h1 class="mb-4">Electro Shop —
+                    <span class="text-primary">Uy tín &amp; Chất lượng</span>
+                </h1>
+                <p class="mb-4 text-muted">
+                    Electro Shop là cửa hàng điện tử trực tuyến chuyên cung cấp các sản phẩm
+                    công nghệ chính hãng bao gồm laptop, điện thoại, máy ảnh, tai nghe và nhiều
+                    thiết bị điện tử khác với giá cạnh tranh nhất trên thị trường Việt Nam.
+                </p>
+                <p class="mb-4 text-muted">
+                    Được xây dựng trên nền tảng ASP.NET Core MVC 8.0, website mang lại trải nghiệm
+                    mua sắm trực tuyến hiện đại với đầy đủ tính năng tìm kiếm, lọc sản phẩm
+                    và giỏ hàng thông minh.
+                </p>
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-primary fa-2x me-3"></i>
+                            <span>Sản phẩm chính hãng 100%</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-primary fa-2x me-3"></i>
+                            <span>Bảo hành toàn quốc</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-primary fa-2x me-3"></i>
+                            <span>Giao hàng miễn phí</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-primary fa-2x me-3"></i>
+                            <span>Đổi trả trong 30 ngày</span>
+                        </div>
+                    </div>
+                </div>
+                <a asp-controller="Shop" asp-action="Index"
+                   class="btn btn-primary rounded-pill py-3 px-5">
+                    <i class="fas fa-store me-2"></i>Khám phá sản phẩm
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.1s">
+                <img src="~/img/carousel-1.png" class="img-fluid rounded shadow"
+                     alt="Giới thiệu ElectroShop" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thống kê -->
+<div class="container-fluid bg-primary py-5">
+    <div class="container py-3">
+        <div class="row g-4 text-white text-center">
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.1s">
+                <i class="fas fa-store fa-3x mb-3"></i>
+                <h1 class="display-4 fw-bold">12+</h1>
+                <p class="mb-0 fs-5">Năm kinh nghiệm</p>
+            </div>
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.2s">
+                <i class="fas fa-users fa-3x mb-3"></i>
+                <h1 class="display-4 fw-bold">5K+</h1>
+                <p class="mb-0 fs-5">Khách hàng tin dùng</p>
+            </div>
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.3s">
+                <i class="fas fa-box-open fa-3x mb-3"></i>
+                <h1 class="display-4 fw-bold">500+</h1>
+                <p class="mb-0 fs-5">Sản phẩm đa dạng</p>
+            </div>
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.4s">
+                <i class="fas fa-medal fa-3x mb-3"></i>
+                <h1 class="display-4 fw-bold">50+</h1>
+                <p class="mb-0 fs-5">Thương hiệu uy tín</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Giá trị cốt lõi -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5 wow fadeInUp">
+            <h6 class="text-primary text-uppercase" style="letter-spacing:3px;">Giá trị cốt lõi</h6>
+            <h1>Tại sao chọn Electro Shop?</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="card border-0 shadow-sm h-100 text-center p-4">
+                    <div class="rounded-circle bg-primary d-flex align-items-center
+                                justify-content-center mx-auto mb-4"
+                         style="width:80px;height:80px;">
+                        <i class="fas fa-shield-alt fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Uy tín &amp; Minh bạch</h5>
+                    <p class="text-muted">
+                        Cam kết cung cấp sản phẩm chính hãng, hóa đơn VAT đầy đủ,
+                        công khai nguồn gốc xuất xứ.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="card border-0 shadow-sm h-100 text-center p-4">
+                    <div class="rounded-circle bg-primary d-flex align-items-center
+                                justify-content-center mx-auto mb-4"
+                         style="width:80px;height:80px;">
+                        <i class="fas fa-headset fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Hỗ trợ 24/7</h5>
+                    <p class="text-muted">
+                        Đội ngũ tư vấn chuyên nghiệp sẵn sàng hỗ trợ mọi lúc,
+                        mọi nơi qua điện thoại và chat.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="card border-0 shadow-sm h-100 text-center p-4">
+                    <div class="rounded-circle bg-primary d-flex align-items-center
+                                justify-content-center mx-auto mb-4"
+                         style="width:80px;height:80px;">
+                        <i class="fas fa-shipping-fast fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Giao hàng nhanh</h5>
+                    <p class="text-muted">
+                        Giao trong 2 giờ nội thành, toàn quốc 1–3 ngày làm việc.
+                        Miễn phí vận chuyển.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="card border-0 shadow-sm h-100 text-center p-4">
+                    <div class="rounded-circle bg-primary d-flex align-items-center
+                                justify-content-center mx-auto mb-4"
+                         style="width:80px;height:80px;">
+                        <i class="fas fa-undo fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Đổi trả dễ dàng</h5>
+                    <p class="text-muted">
+                        Đổi trả trong 30 ngày, hoàn tiền 100% nếu sản phẩm
+                        có lỗi từ nhà sản xuất.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

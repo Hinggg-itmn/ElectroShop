@@ -1,0 +1,42 @@
+@* Partial View: _HomePromo.cshtml
+   Gọi từ Home/Index.cshtml:
+   @await Html.PartialAsync("_HomePromo")
+*@
+
+<div class="container-fluid bg-light py-5">
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- Banner 1: Camera -->
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <a asp-controller="Shop" asp-action="Index" asp-route-category="Cameras"
+                   class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Nhiếp ảnh là sự thật và cảm xúc!</p>
+                        <h3 class="text-primary">Camera Nhiếp Ảnh</h3>
+                        <h1 class="display-3 text-secondary mb-0">
+                            40% <span class="text-primary fw-normal">Off</span>
+                        </h1>
+                    </div>
+                    <img src="~/img/product-1.png" class="img-fluid" alt="Camera" />
+                </a>
+            </div>
+
+            <!-- Banner 2: Wearables -->
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
+                <a asp-controller="Shop" asp-action="Index" asp-route-category="Wearables"
+                   class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Chọn đồng hồ, chọn đẳng cấp!</p>
+                        <h3 class="text-primary">Đồng hồ thông minh</h3>
+                        <h1 class="display-3 text-secondary mb-0">
+                            20% <span class="text-primary fw-normal">Off</span>
+                        </h1>
+                    </div>
+                    <img src="~/img/product-2.png" class="img-fluid" alt="Watch" />
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
