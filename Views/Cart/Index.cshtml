@@ -3,19 +3,12 @@
     ViewData["Title"] = "Giỏ hàng";
 }
 
-<div class="container-fluid page-header py-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <h1 class="display-3 text-white mb-3 animated slideInDown">Giỏ hàng</h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb animated slideInDown">
-                <li class="breadcrumb-item">
-                    <a asp-controller="Home" asp-action="Index" class="text-white">Trang chủ</a>
-                </li>
-                <li class="breadcrumb-item text-primary active">Giỏ hàng</li>
-            </ol>
-        </nav>
-    </div>
-</div>
+@await Html.PartialAsync("_PageHeader", new ViewDataDictionary(ViewData)
+{
+    { "PageTitle", "Giỏ hàng" },
+    { "ParentName", "Trang chủ" },
+    { "ParentUrl",  "/" }
+})
 
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -33,7 +26,7 @@
         else
         {
             <div class="row g-5">
-                <!-- Cart Table -->
+                <!-- Bảng giỏ hàng -->
                 <div class="col-lg-8 wow fadeInLeft" data-wow-delay="0.1s">
                     <div class="table-responsive">
                         <table class="table table-borderless align-middle">
@@ -78,7 +71,9 @@
                                                 </div>
                                             </form>
                                         </td>
-                                        <td class="text-center fw-bold text-primary">@item.SubTotal.ToVnd()</td>
+                                        <td class="text-center fw-bold text-primary">
+                                            @item.SubTotal.ToVnd()
+                                        </td>
                                         <td class="text-center">
                                             <form asp-controller="Cart" asp-action="Remove" method="post">
                                                 <input type="hidden" name="productId" value="@item.ProductId" />
@@ -100,7 +95,7 @@
                     </div>
                 </div>
 
-                <!-- Cart Summary -->
+                <!-- Tóm tắt đơn hàng -->
                 <div class="col-lg-4 wow fadeInRight" data-wow-delay="0.1s">
                     <div class="card border-0 shadow-sm rounded">
                         <div class="card-body p-4">

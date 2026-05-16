@@ -431,9 +431,14 @@ Views/
   Success.cshtml
  Contact/Index.cshtml
  Error/Index.cshtml
- Home/Index.cshtml
+ Home/
+  Index.cshtml
+  _HomeHero.cshtml
+  _HomePromo.cshtml
+  _HomeServices.cshtml
  Shared/
   _Layout.cshtml
+  _PageHeader.cshtml
   _ProductCard.cshtml
  Shop/
   Detail.cshtml
@@ -453,9 +458,14 @@ Views/
   Success.cshtml
  Contact/Index.cshtml
  Error/Index.cshtml
- Home/Index.cshtml
+ Home/
+  Index.cshtml
+  _HomeHero.cshtml
+  _HomePromo.cshtml
+  _HomeServices.cshtml
  Shared/
   _Layout.cshtml
+  _PageHeader.cshtml
   _ProductCard.cshtml
  Shop/
   Detail.cshtml

@@ -3,204 +3,16 @@
     ViewData["Title"] = "Trang chủ";
 }
 
-<!-- ═══ Hero Carousel ════════════════════════════════════════════════════ -->
-<div class="container-fluid carousel bg-light px-0">
-    <div class="row g-0 justify-content-end">
-        <div class="col-12 col-lg-7 col-xl-9">
-            <div class="header-carousel owl-carousel bg-light py-5">
-                <div class="row g-0 header-carousel-item align-items-center">
-                    <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
-                        <img src="~/img/carousel-1.png" class="img-fluid w-100" alt="Laptop Sale" />
-                    </div>
-                    <div class="col-xl-6 carousel-content p-4">
-                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight"
-                            data-wow-delay="0.1s" style="letter-spacing:3px;">
-                            Tiết kiệm tới 10 triệu ₫
-                        </h4>
-                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">
-                            Laptop &amp; Máy tính được chọn lọc
-                        </h1>
-                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">
-                            Điều kiện và điều khoản được áp dụng
-                        </p>
-                        <a asp-controller="Shop" asp-action="Index"
-                           class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight"
-                           data-wow-delay="0.7s">Mua ngay</a>
-                    </div>
-                </div>
-                <div class="row g-0 header-carousel-item align-items-center">
-                    <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
-                        <img src="~/img/carousel-2.png" class="img-fluid w-100" alt="Smartphone" />
-                    </div>
-                    <div class="col-xl-6 carousel-content p-4">
-                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight"
-                            data-wow-delay="0.1s" style="letter-spacing:3px;">
-                            Tiết kiệm tới 5 triệu ₫
-                        </h4>
-                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">
-                            Điện thoại giá hời
-                        </h1>
-                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Ưu đãi có hạn</p>
-                        <a asp-controller="Shop" asp-action="Index"
-                           class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight"
-                           data-wow-delay="0.7s">Xem ngay</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-5 col-xl-3 wow fadeInRight" data-wow-delay="0.1s">
-            @if (Model.BestSellers.Any())
-            {
-                var featured = Model.BestSellers.First();
-                <div class="carousel-header-banner h-100">
-                    <img src="@featured.ImageUrl" class="img-fluid w-100 h-100"
-                         style="object-fit:cover;" alt="@featured.Name" />
-                    <div class="carousel-banner-offer">
-                        @if (featured.DiscountPercent.HasValue)
-                        {
-                            <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">
-                                -@featured.DiscountPercent%
-                            </p>
-                        }
-                        <p class="text-primary fs-5 fw-bold mb-0">Ưu đãi đặc biệt</p>
-                    </div>
-                    <div class="carousel-banner">
-                        <div class="carousel-banner-content text-center p-4">
-                            <a asp-controller="Shop" asp-action="Index"
-                               asp-route-category="@featured.Category" class="d-block mb-2">
-                                @featured.Category
-                            </a>
-                            <a asp-controller="Shop" asp-action="Detail"
-                               asp-route-id="@featured.Id" class="d-block text-white fs-5">
-                                @featured.Name
-                            </a>
-                            @if (featured.OldPrice.HasValue)
-                            {
-                                <del class="me-2 text-white">@featured.OldPrice.Value.ToVnd()</del>
-                            }
-                            <span class="text-primary fs-5">@featured.Price.ToVnd()</span>
-                        </div>
-                        <form asp-controller="Cart" asp-action="Add" method="post">
-                            <input type="hidden" name="productId" value="@featured.Id" />
-                            <input type="hidden" name="quantity" value="1" />
-                            <button type="submit" class="btn btn-primary rounded-pill py-2 px-4">
-                                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
+@* ═══ 1. Hero Carousel + Banner phải ════════════════════════════════════ *@
+@await Html.PartialAsync("_HomeHero", Model)
 
-<!-- ═══ Services Bar ══════════════════════════════════════════════════════ -->
-<div class="container-fluid px-0">
-    <div class="row g-0">
-        <div class="col-6 col-md-4 col-lg-2 border-start border-end wow fadeInUp" data-wow-delay="0.1s">
-            <div class="p-4">
-                <div class="d-inline-flex align-items-center">
-                    <i class="fa fa-sync-alt fa-2x text-primary"></i>
-                    <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Miễn hoàn trả</h6>
-                        <p class="mb-0">Trong 30 ngày</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.2s">
-            <div class="p-4">
-                <div class="d-flex align-items-center">
-                    <i class="fab fa-telegram-plane fa-2x text-primary"></i>
-                    <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Miễn phí ship</h6>
-                        <p class="mb-0">Tất cả đơn hàng</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.3s">
-            <div class="p-4">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-life-ring fa-2x text-primary"></i>
-                    <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Hỗ trợ 24/7</h6>
-                        <p class="mb-0">Trực tuyến 24/24</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.4s">
-            <div class="p-4">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-credit-card fa-2x text-primary"></i>
-                    <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Thẻ giảm giá</h6>
-                        <p class="mb-0">Đơn trên 500.000 ₫</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.5s">
-            <div class="p-4">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-lock fa-2x text-primary"></i>
-                    <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Thanh toán an toàn</h6>
-                        <p class="mb-0">100% Bảo mật</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.6s">
-            <div class="p-4">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-blog fa-2x text-primary"></i>
-                    <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Hỗ trợ trực tuyến</h6>
-                        <p class="mb-0">Hoàn tiền 30 ngày đầu</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@* ═══ 2. Services Bar (6 ô dịch vụ) ════════════════════════════════════ *@
+@await Html.PartialAsync("_HomeServices")
 
-<!-- ═══ Promo Banners ═════════════════════════════════════════════════════ -->
-<div class="container-fluid bg-light py-5">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
-                <a asp-controller="Shop" asp-action="Index" asp-route-category="Cameras"
-                   class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
-                    <div>
-                        <p class="text-muted mb-3">Nhiếp ảnh là sự thật và cảm xúc!</p>
-                        <h3 class="text-primary">Camera Nhiếp Ảnh</h3>
-                        <h1 class="display-3 text-secondary mb-0">
-                            40% <span class="text-primary fw-normal">Off</span>
-                        </h1>
-                    </div>
-                    <img src="~/img/product-1.png" class="img-fluid" alt="Camera" />
-                </a>
-            </div>
-            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
-                <a asp-controller="Shop" asp-action="Index" asp-route-category="Wearables"
-                   class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
-                    <div>
-                        <p class="text-muted mb-3">Chọn đồng hồ, chọn đẳng cấp!</p>
-                        <h3 class="text-primary">Đồng hồ thông minh</h3>
-                        <h1 class="display-3 text-secondary mb-0">
-                            20% <span class="text-primary fw-normal">Off</span>
-                        </h1>
-                    </div>
-                    <img src="~/img/product-2.png" class="img-fluid" alt="Watch" />
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+@* ═══ 3. Promo Banners (Camera 40% + Watch 20%) ═════════════════════════ *@
+@await Html.PartialAsync("_HomePromo")
 
-<!-- ═══ Our Products (Tabbed) ═════════════════════════════════════════════ -->
+@* ═══ 4. Tabbed Products ════════════════════════════════════════════════ *@
 <div class="container-fluid product py-5">
     <div class="container py-5">
         <div class="tab-class">
@@ -239,6 +51,8 @@
             </div>
 
             <div class="tab-content">
+
+                <!-- Tab: Tất cả -->
                 <div id="tab-all" class="tab-pane fade show active p-0">
                     <div class="row g-4">
                         @foreach (var p in Model.FeaturedProducts
@@ -252,6 +66,8 @@
                         }
                     </div>
                 </div>
+
+                <!-- Tab: Mới cập bến -->
                 <div id="tab-new" class="tab-pane fade p-0">
                     <div class="row g-4">
                         @foreach (var p in Model.NewArrivals)
@@ -262,6 +78,8 @@
                         }
                     </div>
                 </div>
+
+                <!-- Tab: Nổi bật -->
                 <div id="tab-featured" class="tab-pane fade p-0">
                     <div class="row g-4">
                         @foreach (var p in Model.FeaturedProducts)
@@ -272,6 +90,8 @@
                         }
                     </div>
                 </div>
+
+                <!-- Tab: Bán chạy -->
                 <div id="tab-best" class="tab-pane fade p-0">
                     <div class="row g-4">
                         @foreach (var p in Model.BestSellers)
@@ -282,6 +102,7 @@
                         }
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -294,7 +115,7 @@
     </div>
 </div>
 
-<!-- ═══ Best Sellers Carousel ════════════════════════════════════════════ -->
+@* ═══ 5. Best Sellers Carousel ══════════════════════════════════════════ *@
 <div class="container-fluid bg-light productList py-5">
     <div class="container py-5">
         <div class="row g-4 mb-4">

@@ -49,7 +49,7 @@ public class ShopController : Controller
         return View(vm);
     }
 
-    // GET: /shop/bestseller  ← PHẢI nằm TRONG class, trước dấu } cuối
+    // GET: /shop/bestseller
     public IActionResult Bestseller()
     {
         var vm = new ShopViewModel
@@ -60,4 +60,4 @@ public class ShopController : Controller
         ViewData["Title"] = "Bán chạy nhất";
         return View("Index", vm);
     }
-}   // ← đóng class ở đây, KHÔNG có code nào sau dòng này
+}

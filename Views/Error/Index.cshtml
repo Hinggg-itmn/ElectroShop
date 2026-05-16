@@ -1,27 +1,34 @@
 @{
-    ViewData["Title"] = $"{ViewBag.StatusCode} Error";
     int code = ViewBag.StatusCode ?? 404;
+    ViewData["Title"] = $"Lỗi {code}";
 }
 
-<div class="container-fluid py-5 d-flex align-items-center" style="min-height:70vh;">
+@await Html.PartialAsync("_PageHeader", new ViewDataDictionary(ViewData)
+{
+    { "PageTitle", $"Lỗi {code}" },
+    { "ParentName", "Trang chủ" },
+    { "ParentUrl",  "/" }
+})
+
+<div class="container-fluid py-5 d-flex align-items-center" style="min-height:55vh;">
     <div class="container text-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <h1 class="display-1 fw-bold text-primary">@code</h1>
                 <h2 class="mb-4">
-                    @if (code == 404) { <text>Trang không tìm thấy</text> }
-                    else if (code == 500) { <text>Máy chủ nội bộ bị lỗi</text> }
-                    else { <text>Đã có lỗi xảy ra</text> }
+                    @if (code == 404)      { <text>Trang không tìm thấy</text> }
+                    else if (code == 500)  { <text>Lỗi máy chủ nội bộ</text> }
+                    else                   { <text>Đã có lỗi xảy ra</text> }
                 </h2>
                 <p class="text-muted mb-5 fs-5">@ViewBag.Message</p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
                     <a asp-controller="Home" asp-action="Index"
                        class="btn btn-primary rounded-pill py-3 px-5">
-                        <i class="fas fa-home me-2"></i>Về Trang Chủ
+                        <i class="fas fa-home me-2"></i>Về trang chủ
                     </a>
                     <a asp-controller="Shop" asp-action="Index"
                        class="btn btn-outline-primary rounded-pill py-3 px-5">
-                        <i class="fas fa-store me-2"></i>Trang Sản Phẩm
+                        <i class="fas fa-store me-2"></i>Cửa hàng
                     </a>
                 </div>
             </div>

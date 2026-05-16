@@ -1,44 +1,39 @@
 @model ShopViewModel
 @{
-    ViewData["Title"] = "Shop";
+    ViewData["Title"] = "Cửa hàng";
 }
 
-<!-- Page Header -->
-<div class="container-fluid page-header py-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <h1 class="display-3 text-white mb-3 animated slideInDown">Cửa hàng</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-white">Trang chủ</a></li>
-                <li class="breadcrumb-item text-primary active" aria-current="page">Cửa hàng</li>
-            </ol>
-        </nav>
-    </div>
-</div>
+@* ═══ Page Header (Partial View dùng chung) ════════════════════════════ *@
+@await Html.PartialAsync("_PageHeader", new ViewDataDictionary(ViewData)
+{
+    { "PageTitle", "Cửa hàng" },
+    { "ParentName", "Trang chủ" },
+    { "ParentUrl",  "/" }
+})
 
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="row g-4">
 
-            <!-- ── Sidebar ──────────────────────────────────────────────── -->
+            <!-- ── Sidebar lọc ──────────────────────────────────────── -->
             <div class="col-lg-3 col-xl-3">
                 <div class="card border-0 shadow-sm rounded mb-4">
                     <div class="card-body p-4">
                         <h5 class="fw-bold mb-4 text-primary">
                             <i class="fas fa-filter me-2"></i>Lọc sản phẩm
                         </h5>
-
                         <form asp-controller="Shop" asp-action="Index" method="get" id="filterForm">
-                            <!-- Search -->
+
+                            <!-- Tìm kiếm -->
                             <div class="mb-4">
                                 <label class="fw-semibold mb-2 d-block">Tìm kiếm</label>
                                 <input type="text" name="query" class="form-control rounded-pill"
-                                       placeholder="Product name..." value="@Model.Query" />
+                                       placeholder="Tên sản phẩm..." value="@Model.Query" />
                             </div>
 
-                            <!-- Category -->
+                            <!-- Danh mục -->
                             <div class="mb-4">
-                                <label class="fw-semibold mb-2 d-block">Loại</label>
+                                <label class="fw-semibold mb-2 d-block">Danh mục</label>
                                 @foreach (var cat in Model.Categories)
                                 {
                                     <div class="form-check">
@@ -52,36 +47,40 @@
                                     <input class="form-check-input" type="radio" name="category"
                                            id="cat-all" value=""
                                            @(string.IsNullOrEmpty(Model.SelectedCategory) ? "checked" : "") />
-                                    <label class="form-check-label" for="cat-all"><em>Tất cả loại</em></label>
+                                    <label class="form-check-label" for="cat-all">
+                                        <em>Tất cả danh mục</em>
+                                    </label>
                                 </div>
                             </div>
 
-                            <!-- Price Range -->
+                            <!-- Khoảng giá -->
                             <div class="mb-4">
-                                <label class="fw-semibold mb-2 d-block">Tầm giá</label>
+                                <label class="fw-semibold mb-2 d-block">Khoảng giá (₫)</label>
                                 <div class="d-flex gap-2">
-                                    <input type="number" name="minPrice" class="form-control form-control-sm"
-                                           placeholder="Min $" value="@Model.MinPrice" min="0" />
-                                    <input type="number" name="maxPrice" class="form-control form-control-sm"
-                                           placeholder="Max $" value="@Model.MaxPrice" min="0" />
+                                    <input type="number" name="minPrice"
+                                           class="form-control form-control-sm"
+                                           placeholder="Từ" value="@Model.MinPrice" min="0" />
+                                    <input type="number" name="maxPrice"
+                                           class="form-control form-control-sm"
+                                           placeholder="Đến" value="@Model.MaxPrice" min="0" />
                                 </div>
                             </div>
 
-                            <!-- Sort -->
+                            <!-- Sắp xếp -->
                             <div class="mb-4">
-                                <label class="fw-semibold mb-2 d-block">Lọc</label>
+                                <label class="fw-semibold mb-2 d-block">Sắp xếp theo</label>
                                 <select name="sortBy" class="form-select">
-                                    <option value="" selected="@(Model.SortBy == null)">Mặc định</option>
-                                    <option value="price_asc" selected="@(Model.SortBy == "price_asc")">Giá trị từ thấp đến cao</option>
-                                    <option value="price_desc" selected="@(Model.SortBy == "price_desc")">Giá trị từ cao đến thấp</option>
-                                    <option value="rating" selected="@(Model.SortBy == "rating")">Đánh giá cao nhất</option>
-                                    <option value="newest" selected="@(Model.SortBy == "newest")">Mới nhất</option>
-                                    <option value="bestseller" selected="@(Model.SortBy == "bestseller")">Top bán chạy</option>
+                                    <option value=""           selected="@(Model.SortBy == null)">Mặc định</option>
+                                    <option value="price_asc"  selected="@(Model.SortBy == "price_asc")">Giá: thấp → cao</option>
+                                    <option value="price_desc" selected="@(Model.SortBy == "price_desc")">Giá: cao → thấp</option>
+                                    <option value="rating"     selected="@(Model.SortBy == "rating")">Đánh giá cao nhất</option>
+                                    <option value="newest"     selected="@(Model.SortBy == "newest")">Mới nhất</option>
+                                    <option value="bestseller" selected="@(Model.SortBy == "bestseller")">Bán chạy nhất</option>
                                 </select>
                             </div>
 
                             <button type="submit" class="btn btn-primary w-100 rounded-pill">
-                                <i class="fas fa-search me-2"></i>Thêm bộ lọc
+                                <i class="fas fa-search me-2"></i>Áp dụng bộ lọc
                             </button>
                             <a asp-controller="Shop" asp-action="Index"
                                class="btn btn-outline-secondary w-100 rounded-pill mt-2">
@@ -92,19 +91,18 @@
                 </div>
             </div>
 
-            <!-- ── Product Grid ────────────────────────────────────────── -->
+            <!-- ── Lưới sản phẩm ────────────────────────────────────── -->
             <div class="col-lg-9 col-xl-9">
-                <!-- Results bar -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <p class="mb-0 text-muted">
-                        Showing <strong>@Model.TotalResults</strong> product@(Model.TotalResults != 1 ? "s" : "")
+                        Hiển thị <strong>@Model.TotalResults</strong> sản phẩm
                         @if (!string.IsNullOrEmpty(Model.Query))
                         {
-                            <span> for "<strong>@Model.Query</strong>"</span>
+                            <span> cho "<strong>@Model.Query</strong>"</span>
                         }
                         @if (!string.IsNullOrEmpty(Model.SelectedCategory))
                         {
-                            <span> in <strong>@Model.SelectedCategory</strong></span>
+                            <span> trong <strong>@Model.SelectedCategory</strong></span>
                         }
                     </p>
                 </div>
@@ -113,11 +111,10 @@
                 {
                     <div class="text-center py-5">
                         <i class="fas fa-search fa-4x text-muted mb-4"></i>
-                        <h4 class="text-muted">Không có sản phẩm</h4>
-                        <p class="text-muted">Hãy thử điều chỉnh tiêu chí tìm kiếm hoặc lọc của bạn..</p>
-                        <a asp-controller="Shop" asp-action="Index" class="btn btn-primary rounded-pill">
-                            Nhìn tất cả sản phẩm
-                        </a>
+                        <h4 class="text-muted">Không tìm thấy sản phẩm nào</h4>
+                        <p class="text-muted">Hãy thử điều chỉnh tiêu chí tìm kiếm hoặc bộ lọc.</p>
+                        <a asp-controller="Shop" asp-action="Index"
+                           class="btn btn-primary rounded-pill">Xem tất cả sản phẩm</a>
                     </div>
                 }
                 else
@@ -132,6 +129,7 @@
                     </div>
                 }
             </div>
+
         </div>
     </div>
 </div>
