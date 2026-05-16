@@ -1,20 +1,11 @@
-# Tệp bí mật
-.env
-*.secrets
+# Các file cache và cấu hình cá nhân của Visual Studio
+*.csproj.lscache
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
 
-# Thư mục IDE
-.vscode/
-.idea/
-
-# File build của .NET (Bắt buộc giấu)
-[Bb]in/
-[Oo]bj/
-
-# Các file cấu hình cá nhân (nếu có)
-appsettings.Development.json
-
-.gitignore
-ElectroShop.csproj
-ElectroShop.sln
-appsettings.json
-ElectroShop.csproj.lscache
+# Các thư mục biên dịch sinh ra tự động
+bin/
+obj/
+.vs/
