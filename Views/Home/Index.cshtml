@@ -1,6 +1,6 @@
 @model HomeViewModel
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Trang chủ";
 }
 
 <!-- ═══ Hero Carousel ════════════════════════════════════════════════════ -->
@@ -13,13 +13,19 @@
                         <img src="~/img/carousel-1.png" class="img-fluid w-100" alt="Laptop Sale" />
                     </div>
                     <div class="col-xl-6 carousel-content p-4">
-                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s" style="letter-spacing:3px;">Tiết kiệm tới 400$</h4>
+                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight"
+                            data-wow-delay="0.1s" style="letter-spacing:3px;">
+                            Tiết kiệm tới 10 triệu ₫
+                        </h4>
                         <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">
-                            Laptops &amp; Máy tính Hoặc Điện Thoại Được Chọn
+                            Laptop &amp; Máy tính được chọn lọc
                         </h1>
-                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Điều kiện và điều khoản được áp dụng</p>
+                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">
+                            Điều kiện và điều khoản được áp dụng
+                        </p>
                         <a asp-controller="Shop" asp-action="Index"
-                           class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s">Shop Now</a>
+                           class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight"
+                           data-wow-delay="0.7s">Mua ngay</a>
                     </div>
                 </div>
                 <div class="row g-0 header-carousel-item align-items-center">
@@ -27,13 +33,17 @@
                         <img src="~/img/carousel-2.png" class="img-fluid w-100" alt="Smartphone" />
                     </div>
                     <div class="col-xl-6 carousel-content p-4">
-                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s" style="letter-spacing:3px;">Tiết kiệm tới 200$</h4>
+                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight"
+                            data-wow-delay="0.1s" style="letter-spacing:3px;">
+                            Tiết kiệm tới 5 triệu ₫
+                        </h4>
                         <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">
-                            Điện thoái giá hời
+                            Điện thoại giá hời
                         </h1>
-                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Ưu đãi Có Hạn</p>
+                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Ưu đãi có hạn</p>
                         <a asp-controller="Shop" asp-action="Index"
-                           class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s">Lên Hàng Ngay</a>
+                           class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight"
+                           data-wow-delay="0.7s">Xem ngay</a>
                     </div>
                 </div>
             </div>
@@ -43,25 +53,32 @@
             {
                 var featured = Model.BestSellers.First();
                 <div class="carousel-header-banner h-100">
-                    <img src="@featured.ImageUrl" class="img-fluid w-100 h-100" style="object-fit:cover;" alt="@featured.Name" />
+                    <img src="@featured.ImageUrl" class="img-fluid w-100 h-100"
+                         style="object-fit:cover;" alt="@featured.Name" />
                     <div class="carousel-banner-offer">
                         @if (featured.DiscountPercent.HasValue)
                         {
-                            <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">-@featured.DiscountPercent%</p>
+                            <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">
+                                -@featured.DiscountPercent%
+                            </p>
                         }
                         <p class="text-primary fs-5 fw-bold mb-0">Ưu đãi đặc biệt</p>
                     </div>
                     <div class="carousel-banner">
                         <div class="carousel-banner-content text-center p-4">
-                            <a asp-controller="Shop" asp-action="Index" asp-route-category="@featured.Category"
-                               class="d-block mb-2">@featured.Category</a>
-                            <a asp-controller="Shop" asp-action="Detail" asp-route-id="@featured.Id"
-                               class="d-block text-white fs-5">@featured.Name</a>
+                            <a asp-controller="Shop" asp-action="Index"
+                               asp-route-category="@featured.Category" class="d-block mb-2">
+                                @featured.Category
+                            </a>
+                            <a asp-controller="Shop" asp-action="Detail"
+                               asp-route-id="@featured.Id" class="d-block text-white fs-5">
+                                @featured.Name
+                            </a>
                             @if (featured.OldPrice.HasValue)
                             {
-                                <del class="me-2 text-white">$@featured.OldPrice.Value.ToString("N2")</del>
+                                <del class="me-2 text-white">@featured.OldPrice.Value.ToVnd()</del>
                             }
-                            <span class="text-primary fs-5">$@featured.Price.ToString("N2")</span>
+                            <span class="text-primary fs-5">@featured.Price.ToVnd()</span>
                         </div>
                         <form asp-controller="Cart" asp-action="Add" method="post">
                             <input type="hidden" name="productId" value="@featured.Id" />
@@ -86,7 +103,7 @@
                     <i class="fa fa-sync-alt fa-2x text-primary"></i>
                     <div class="ms-4">
                         <h6 class="text-uppercase mb-2">Miễn hoàn trả</h6>
-                        <p class="mb-0">Trong 30 ngày tiền về túi ngay</p>
+                        <p class="mb-0">Trong 30 ngày</p>
                     </div>
                 </div>
             </div>
@@ -96,7 +113,7 @@
                 <div class="d-flex align-items-center">
                     <i class="fab fa-telegram-plane fa-2x text-primary"></i>
                     <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Miễn Phí Ship</h6>
+                        <h6 class="text-uppercase mb-2">Miễn phí ship</h6>
                         <p class="mb-0">Tất cả đơn hàng</p>
                     </div>
                 </div>
@@ -119,7 +136,7 @@
                     <i class="fas fa-credit-card fa-2x text-primary"></i>
                     <div class="ms-4">
                         <h6 class="text-uppercase mb-2">Thẻ giảm giá</h6>
-                        <p class="mb-0">Giảm giá cho đơn hàng trên 50$</p>
+                        <p class="mb-0">Đơn trên 500.000 ₫</p>
                     </div>
                 </div>
             </div>
@@ -129,7 +146,7 @@
                 <div class="d-flex align-items-center">
                     <i class="fas fa-lock fa-2x text-primary"></i>
                     <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Thanh Toán An Toàn</h6>
+                        <h6 class="text-uppercase mb-2">Thanh toán an toàn</h6>
                         <p class="mb-0">100% Bảo mật</p>
                     </div>
                 </div>
@@ -141,7 +158,7 @@
                     <i class="fas fa-blog fa-2x text-primary"></i>
                     <div class="ms-4">
                         <h6 class="text-uppercase mb-2">Hỗ trợ trực tuyến</h6>
-                        <p class="mb-0">Miễn phí hoàn hàng trong 30 ngày đầu</p>
+                        <p class="mb-0">Hoàn tiền 30 ngày đầu</p>
                     </div>
                 </div>
             </div>
@@ -159,7 +176,9 @@
                     <div>
                         <p class="text-muted mb-3">Nhiếp ảnh là sự thật và cảm xúc!</p>
                         <h3 class="text-primary">Camera Nhiếp Ảnh</h3>
-                        <h1 class="display-3 text-secondary mb-0">40% <span class="text-primary fw-normal">Off</span></h1>
+                        <h1 class="display-3 text-secondary mb-0">
+                            40% <span class="text-primary fw-normal">Off</span>
+                        </h1>
                     </div>
                     <img src="~/img/product-1.png" class="img-fluid" alt="Camera" />
                 </a>
@@ -170,7 +189,9 @@
                     <div>
                         <p class="text-muted mb-3">Chọn đồng hồ, chọn đẳng cấp!</p>
                         <h3 class="text-primary">Đồng hồ thông minh</h3>
-                        <h1 class="display-3 text-secondary mb-0">20% <span class="text-primary fw-normal">Off</span></h1>
+                        <h1 class="display-3 text-secondary mb-0">
+                            20% <span class="text-primary fw-normal">Off</span>
+                        </h1>
                     </div>
                     <img src="~/img/product-2.png" class="img-fluid" alt="Watch" />
                 </a>
@@ -185,28 +206,32 @@
         <div class="tab-class">
             <div class="row g-4">
                 <div class="col-lg-4 text-start wow fadeInLeft" data-wow-delay="0.1s">
-                    <h1>Sản phẩm của tôi</h1>
+                    <h1>Sản phẩm của chúng tôi</h1>
                 </div>
                 <div class="col-lg-8 text-end wow fadeInRight" data-wow-delay="0.1s">
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
                         <li class="nav-item mb-4">
-                            <a class="d-flex mx-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-all">
-                                <span class="text-dark" style="width:130px;">Tất cả sản phẩm</span>
+                            <a class="d-flex mx-2 py-2 bg-light rounded-pill active"
+                               data-bs-toggle="pill" href="#tab-all">
+                                <span class="text-dark" style="width:130px;">Tất cả</span>
                             </a>
                         </li>
                         <li class="nav-item mb-4">
-                            <a class="d-flex py-2 mx-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-new">
+                            <a class="d-flex py-2 mx-2 bg-light rounded-pill"
+                               data-bs-toggle="pill" href="#tab-new">
                                 <span class="text-dark" style="width:130px;">Mới cập bến</span>
                             </a>
                         </li>
                         <li class="nav-item mb-4">
-                            <a class="d-flex mx-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-featured">
+                            <a class="d-flex mx-2 py-2 bg-light rounded-pill"
+                               data-bs-toggle="pill" href="#tab-featured">
                                 <span class="text-dark" style="width:130px;">Nổi bật</span>
                             </a>
                         </li>
                         <li class="nav-item mb-4">
-                            <a class="d-flex mx-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-best">
-                                <span class="text-dark" style="width:130px;">Đang bán chạy</span>
+                            <a class="d-flex mx-2 py-2 bg-light rounded-pill"
+                               data-bs-toggle="pill" href="#tab-best">
+                                <span class="text-dark" style="width:130px;">Bán chạy</span>
                             </a>
                         </li>
                     </ul>
@@ -214,11 +239,12 @@
             </div>
 
             <div class="tab-content">
-                <!-- All Products -->
                 <div id="tab-all" class="tab-pane fade show active p-0">
                     <div class="row g-4">
-                        @foreach (var p in Model.FeaturedProducts.Concat(Model.BestSellers).Concat(Model.NewArrivals)
-                                            .DistinctBy(x => x.Id).Take(8))
+                        @foreach (var p in Model.FeaturedProducts
+                            .Concat(Model.BestSellers)
+                            .Concat(Model.NewArrivals)
+                            .DistinctBy(x => x.Id).Take(8))
                         {
                             <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
                                 @await Html.PartialAsync("_ProductCard", p)
@@ -226,7 +252,6 @@
                         }
                     </div>
                 </div>
-                <!-- New Arrivals -->
                 <div id="tab-new" class="tab-pane fade p-0">
                     <div class="row g-4">
                         @foreach (var p in Model.NewArrivals)
@@ -237,7 +262,6 @@
                         }
                     </div>
                 </div>
-                <!-- Featured -->
                 <div id="tab-featured" class="tab-pane fade p-0">
                     <div class="row g-4">
                         @foreach (var p in Model.FeaturedProducts)
@@ -248,7 +272,6 @@
                         }
                     </div>
                 </div>
-                <!-- Best Sellers -->
                 <div id="tab-best" class="tab-pane fade p-0">
                     <div class="row g-4">
                         @foreach (var p in Model.BestSellers)
@@ -263,8 +286,9 @@
         </div>
 
         <div class="text-center mt-5">
-            <a asp-controller="Shop" asp-action="Index" class="btn btn-primary rounded-pill py-3 px-5">
-                View All Products <i class="fas fa-arrow-right ms-2"></i>
+            <a asp-controller="Shop" asp-action="Index"
+               class="btn btn-primary rounded-pill py-3 px-5">
+                Xem tất cả sản phẩm <i class="fas fa-arrow-right ms-2"></i>
             </a>
         </div>
     </div>
@@ -278,8 +302,8 @@
                 <h1>Bán chạy nhất</h1>
             </div>
             <div class="col-lg-6 text-lg-end wow fadeInRight" data-wow-delay="0.1s">
-                <a asp-controller="Shop" asp-action="Index" asp-route-sortBy="bestseller"
-                   class="btn btn-primary rounded-pill py-2 px-4">Tất cả</a>
+                <a asp-controller="Shop" asp-action="Bestseller"
+                   class="btn btn-primary rounded-pill py-2 px-4">Xem tất cả</a>
             </div>
         </div>
         <div class="productList-carousel owl-carousel">
@@ -292,4 +316,3 @@
         </div>
     </div>
 </div>
-

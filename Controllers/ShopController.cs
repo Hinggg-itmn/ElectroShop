@@ -13,7 +13,7 @@ public class ShopController : Controller
         _dataService = dataService;
     }
 
-    // GET: /shop  hoặc  /shop?query=...&category=...&sortBy=...
+    // GET: /shop
     public IActionResult Index(string? query, string? category, string? sortBy,
                                decimal? minPrice, decimal? maxPrice)
     {
@@ -43,20 +43,21 @@ public class ShopController : Controller
 
         var vm = new ProductDetailViewModel
         {
-            Product        = product,
+            Product         = product,
             RelatedProducts = related,
         };
         return View(vm);
     }
-}
-// GET: /shop/bestseller
-public IActionResult Bestseller()
-{
-    var vm = new ShopViewModel
+
+    // GET: /shop/bestseller  ← PHẢI nằm TRONG class, trước dấu } cuối
+    public IActionResult Bestseller()
     {
-        Products   = _dataService.GetBestSellers(),
-        Categories = _dataService.GetCategories(),
-    };
-    ViewData["Title"] = "Best Sellers";
-    return View("Index", vm); // dùng lại View Index của Shop
-}
+        var vm = new ShopViewModel
+        {
+            Products   = _dataService.GetBestSellers(),
+            Categories = _dataService.GetCategories(),
+        };
+        ViewData["Title"] = "Bán chạy nhất";
+        return View("Index", vm);
+    }
+}   // ← đóng class ở đây, KHÔNG có code nào sau dòng này

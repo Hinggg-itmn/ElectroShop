@@ -29,9 +29,9 @@
             <div>
                 @if (Model.OldPrice.HasValue)
                 {
-                    <del class="me-2 text-muted">$@Model.OldPrice.Value.ToString("N2")</del>
+                    <del class="me-2 text-muted">@Model.OldPrice.Value.ToVnd()</del>
                 }
-                <span class="text-primary fs-5 fw-bold">$@Model.Price.ToString("N2")</span>
+                <span class="text-primary fs-5 fw-bold">@Model.Price.ToVnd()</span>
             </div>
         </div>
     </div>
@@ -44,7 +44,6 @@
             </button>
         </form>
         <div class="d-flex justify-content-between align-items-center">
-            <!-- Star rating -->
             <div class="d-flex">
                 @for (int i = 1; i <= 5; i++)
                 {

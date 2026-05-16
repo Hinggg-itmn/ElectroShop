@@ -13,3 +13,7 @@
 # Các file cấu hình cá nhân (nếu có)
 appsettings.Development.json
 
+.gitignore
+ElectroShop.csproj
+ElectroShop.sln
+appsettings.json
