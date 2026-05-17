@@ -1,0 +1,63 @@
+<!-- ═══ Topbar ═══════════════════════════════════════════════════════ -->
+<div class="container-fluid px-5 d-none border-bottom d-lg-block">
+    <div class="row gx-0 align-items-center">
+
+        <!-- Trái: link phụ -->
+        <div class="col-lg-4 text-center text-lg-start mb-lg-0">
+            <div class="d-inline-flex align-items-center" style="height:45px;">
+                <a asp-controller="Home" asp-action="Index" class="text-muted me-2">Trợ giúp</a>
+                <small>/</small>
+                <a href="#" class="text-muted mx-2">Hỗ trợ</a>
+                <small>/</small>
+                <a asp-controller="Contact" asp-action="Index" class="text-muted ms-2">Liên hệ</a>
+            </div>
+        </div>
+
+        <!-- Giữa: hotline -->
+        <div class="col-lg-4 text-center d-flex align-items-center justify-content-center">
+            <small class="text-dark">Hotline:</small>
+            <a href="tel:+0123456789" class="text-muted ms-1">(+012) 1234 567890</a>
+        </div>
+
+        <!-- Phải: currency / ngôn ngữ / tài khoản -->
+        <div class="col-lg-4 text-center text-lg-end">
+            <div class="d-inline-flex align-items-center" style="height:45px;">
+
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle text-muted me-2" data-bs-toggle="dropdown">
+                        <small>VND</small>
+                    </a>
+                    <div class="dropdown-menu rounded">
+                        <a href="#" class="dropdown-item">VND</a>
+                        <a href="#" class="dropdown-item">USD</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle text-muted mx-2" data-bs-toggle="dropdown">
+                        <small>Tiếng Việt</small>
+                    </a>
+                    <div class="dropdown-menu rounded">
+                        <a href="#" class="dropdown-item">Tiếng Việt</a>
+                        <a href="#" class="dropdown-item">English</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown">
+                        <small><i class="fa fa-user me-1"></i>Tài khoản</small>
+                    </a>
+                    <div class="dropdown-menu rounded">
+                        <a asp-controller="Account" asp-action="Login"    class="dropdown-item">Đăng nhập</a>
+                        <a asp-controller="Account" asp-action="Register" class="dropdown-item">Đăng ký</a>
+                        <div class="dropdown-divider"></div>
+                        <a asp-controller="Cart"    asp-action="Index"    class="dropdown-item">Giỏ hàng</a>
+                        <a asp-controller="Account" asp-action="Logout"   class="dropdown-item">Đăng xuất</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

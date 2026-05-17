@@ -2,9 +2,8 @@
 ```
 ElectroShop
 ├─ appsettings.json
-├─ bin
 ├─ Controllers
-│  ├─ AboutController.cs
+│  ├─ AboutController.cs 
 │  ├─ AccountController.cs
 │  ├─ CartController.cs
 │  ├─ CheckoutController.cs
@@ -17,25 +16,18 @@ ElectroShop
 │  ├─ CurrencyHelper.cs
 │  ├─ Product.cs
 │  ├─ ProductDataService.cs
-│  └─ ViewModels
-│     └─ ViewModels.cs
-├─ obj
+│  └─ ViewModels/ViewModels.cs
 ├─ Program.cs
 ├─ Views
-│  ├─ About-Index.cshhtml
-│  ├─ Account-Login.cshtml,Register.cshtml
-│  ├─ Cart-Index.cshtml
-│  ├─ Checkout-Index.cshtl,Success.cshtml
-│  ├─ Contact-Index.cshtml
-│  ├─ Error-Index.cshtml
-│  ├─ Home-Index.cshtml
-│  ├─ Shared-_Layout.cshtml,_ProductCard.cshtml
-│  ├─ Shop-Detail.cshtml,Index.cshtml
-│  ├─ _ViewImports.cshtml,_ViewStart.cshtml
-└─ wwwroot
-   ├─ css
-   ├─ img
-   ├─ js
-   ├─ lib
-   └─ scss
+│  ├─ About/Index.cshtml
+│  ├─ Account/Login.cshtml, Register.cshtml
+│  ├─ Cart/Index.cshtml
+│  ├─ Checkout/Index.cshtml, Succes.cshtml
+│  ├─ Contact/Index.cshtml
+│  ├─ Error/Index.cshtml
+│  ├─ Home/Index.cshtml, _HomeHero.cshtml, _HomePromo.cshtmml,_HomeServices.cshtl
+│  ├─ Shared/_Layout.cshtml, _PageHeader.cshtml, _ProductCard.cshtml
+│  ├─ Shop/Index.cshtml, Detail.cshtml
+│  └─ _ViewStart.cshtml, _ViewImports.cshtml
+└─ wwwroot/css, js, lib, scss
 ```

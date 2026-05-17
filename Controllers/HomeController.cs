@@ -24,4 +24,8 @@ public class HomeController : Controller
         };
         return View(vm);
     }
+    public IActionResult TestHeader()
+    {
+    return View();
+    }
 }

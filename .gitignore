@@ -4,6 +4,9 @@
 *.suo
 *.userosscache
 *.sln.docstates
+*.csproj
+*.sln
+*.csprk.lscache
 
 # Các thư mục biên dịch sinh ra tự động
 bin/

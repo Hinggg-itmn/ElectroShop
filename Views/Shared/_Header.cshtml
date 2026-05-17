@@ -1,0 +1,56 @@
+<!-- ═══ Header (Logo + Search + Cart) ═══════════════════════════════ -->
+<div class="container-fluid px-5 py-4 d-none d-lg-block">
+    <div class="row gx-0 align-items-center">
+
+        <!-- Logo -->
+        <div class="col-md-4 col-lg-3 text-center text-lg-start">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand p-0">
+                <h1 class="display-5 text-primary m-0">
+                    <i class="fas fa-shopping-bag text-secondary me-2"></i>Điện tử
+                </h1>
+            </a>
+        </div>
+
+        <!-- Search -->
+        <div class="col-md-4 col-lg-6 text-center">
+            <form asp-controller="Shop" asp-action="Index" method="get" class="position-relative ps-4">
+                <div class="d-flex border rounded-pill">
+                    <input class="form-control border-0 rounded-pill w-100 py-3"
+                           type="text" name="query"
+                           placeholder="Tìm kiếm sản phẩm..."
+                           value="@ViewData["CurrentQuery"]" />
+                    <button type="submit"
+                            class="btn btn-primary rounded-pill py-3 px-5"
+                            style="border:0;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Cart icon + badge -->
+        <div class="col-md-4 col-lg-3 text-center text-lg-end">
+            <div class="d-inline-flex align-items-center">
+
+                <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3">
+                    <span class="rounded-circle btn-md-square border">
+                        <i class="fas fa-heart"></i>
+                    </span>
+                </a>
+
+                <a asp-controller="Cart" asp-action="Index"
+                   class="text-muted d-flex align-items-center justify-content-center">
+                    <span class="rounded-circle btn-md-square border position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-badge"
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                              style="font-size:10px;display:none;">0</span>
+                    </span>
+                    <span class="text-dark ms-2" id="cart-total">0 ₫</span>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</div>

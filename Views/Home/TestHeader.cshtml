@@ -1,0 +1,10 @@
+@{
+    ViewData["Title"] = "Test Header";
+}
+
+@await Html.PartialAsync("_PageHeader", new ViewDataDictionary(ViewData)
+{
+    { "PageTitle", "Cart" },
+    { "ParentName", "Home" },
+    { "ParentUrl", "/" }
+})

@@ -16,7 +16,6 @@ builder.Services.AddSession(options =>
 
 // Đăng ký mock data service (sau này thay bằng DbContext)
 builder.Services.AddSingleton<ProductDataService>();
-
 var app = builder.Build();
 
 // ── Middleware pipeline ───────────────────────────────────────────────────
